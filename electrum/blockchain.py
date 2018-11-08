@@ -31,7 +31,6 @@ from . import constants
 from .util import bfh, bh2u
 from .simple_config import SimpleConfig
 
-
 HEADER_SIZE = 80  # bytes
 MAX_TARGET = 0x00000000FFFF0000000000000000000000000000000000000000000000000000
 
