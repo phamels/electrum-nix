@@ -47,9 +47,9 @@ class NixMainnet(AbstractNet):
 
     TESTNET = False
     WIF_PREFIX = 0x80
-    ADDRTYPE_P2PKH = 0
-    ADDRTYPE_P2SH = 5
-    SEGWIT_HRP = "n"
+    ADDRTYPE_P2PKH = 38
+    ADDRTYPE_P2SH = 53
+    SEGWIT_HRP = "nix"
     GENESIS = "dd28ad86def767c3cfc34267a950d871fc7462bc57ea4a929fc3596d9b598e41"
     DEFAULT_PORTS = {'t': '50001', 's': '50002'}
     DEFAULT_SERVERS = read_json('servers.json', {})
