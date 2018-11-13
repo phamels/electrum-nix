@@ -47,13 +47,13 @@ class NixMainnet(AbstractNet):
 
     TESTNET = False
     WIF_PREFIX = 0x80
-    ADDRTYPE_P2PKH = 38
-    ADDRTYPE_P2SH = 53
+    ADDRTYPE_P2PKH = 0x26
+    ADDRTYPE_P2SH = 0x35
     SEGWIT_HRP = "nix"
     GENESIS = "dd28ad86def767c3cfc34267a950d871fc7462bc57ea4a929fc3596d9b598e41"
     DEFAULT_PORTS = {'t': '50001', 's': '50002'}
     DEFAULT_SERVERS = read_json('servers.json', {})
-    CHECKPOINTS = read_json('checkpoints.json', {})
+    CHECKPOINTS = read_json('checkpoints.json', [])
 
     XPRV_HEADERS = {
         'standard': 0x0488ade4,  # xprv
