@@ -326,6 +326,7 @@ class Interface(PrintError):
         self.print_error('requesting block header {} in mode {}'.format(height, assert_mode))
         timeout = 5 if not self.proxy else 10
         res = await self.session.send_request('blockchain.block.header', [height], timeout=timeout)
+        self.print_error('deserialize_header: {}'.format(blockchain.deserialize_header(bytes.fromhex(res), height)))
         return blockchain.deserialize_header(bytes.fromhex(res), height)
 
     async def request_chunk(self, height, tip=None, *, can_return_early=False):
@@ -481,6 +482,7 @@ class Interface(PrintError):
             else:
                 bad = height
                 bad_header = header
+                self.print_error('bad_header: {}'.format(bad_header))
             if good + 1 == bad:
                 break
 

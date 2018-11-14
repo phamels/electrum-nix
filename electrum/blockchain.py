@@ -308,12 +308,16 @@ class Blockchain(util.PrintError):
     def read_header(self, height: int) -> Optional[dict]:
         assert self.parent_id != self.forkpoint
         if height < 0:
+            self.print_error('height < 0')
             return
         if height < self.forkpoint:
+            self.print_error('height .< self.forkpoint')
             return self.parent().read_header(height)
         if height > self.height():
+            self.print_error('{} > {}'.format(height, self.height()))
             return
         delta = height - self.forkpoint
+        self.print_error('DELTA: {}'.format(delta))
         name = self.path()
         self.assert_headers_file_available(name)
         with open(name, 'rb') as f:
