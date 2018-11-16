@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Parameterize
-PYTHON_VERSION=3.7.1
+PYTHON_VERSION=3.6.4
 BUILDDIR=/tmp/electrum-build
 PACKAGE=Electrum-NIX
 GIT_REPO=https://github.com/NixPlatform/electrum-nix
@@ -18,7 +18,7 @@ VERSION=`git describe --tags --dirty --always`
 which brew > /dev/null 2>&1 || fail "Please install brew from https://brew.sh/ to continue"
 
 info "Installing Python $PYTHON_VERSION"
-export PATH="~/.pyenv/bin:~/.pyenv/shims:~/Library/Python/3.7/bin:$PATH"
+export PATH="~/.pyenv/bin:~/.pyenv/shims:~/Library/Python/3.6/bin:$PATH"
 if [ -d "~/.pyenv" ]; then
   pyenv update
 else
