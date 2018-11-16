@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NAME_ROOT=electrum
+NAME_ROOT=electrum-nix
 PYTHON_VERSION=3.6.6
 
 # These settings probably don't need any change

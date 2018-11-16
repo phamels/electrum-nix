@@ -2,18 +2,18 @@
 # sudo desktop-file-install electrum.desktop
 
 [Desktop Entry]
-Comment=Lightweight Bitcoin Client
+Comment=Lightweight NIX Client
 Exec=sh -c "PATH=\"\\$HOME/.local/bin:\\$PATH\"; electrum %u"
 GenericName[en_US]=Bitcoin Wallet
 GenericName=Bitcoin Wallet
 Icon=electrum
-Name[en_US]=Electrum Bitcoin Wallet
-Name=Electrum Bitcoin Wallet
+Name[en_US]=Electrum NIX Wallet
+Name=Electrum NIX Wallet
 Categories=Finance;Network;
 StartupNotify=false
 Terminal=false
 Type=Application
-MimeType=x-scheme-handler/bitcoin;
+MimeType=x-scheme-handler/nix;
 Actions=Testnet;
 
 [Desktop Action Testnet]

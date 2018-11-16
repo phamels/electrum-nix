@@ -56,18 +56,18 @@ def inv_dict(d):
     return {v: k for k, v in d.items()}
 
 
-base_units = {'BTC':8, 'mBTC':5, 'bits':2, 'sat':0}
+base_units = {'NIX':8, 'mNIX':5, 'bits':2, 'sat':0}
 base_units_inverse = inv_dict(base_units)
-base_units_list = ['BTC', 'mBTC', 'bits', 'sat']  # list(dict) does not guarantee order
+base_units_list = ['NIX', 'mNIX', 'bits', 'sat']  # list(dict) does not guarantee order
 
-DECIMAL_POINT_DEFAULT = 5  # mBTC
+DECIMAL_POINT_DEFAULT = 5  # mNIX
 
 
 class UnknownBaseUnit(Exception): pass
 
 
 def decimal_point_to_base_unit_name(dp: int) -> str:
-    # e.g. 8 -> "BTC"
+    # e.g. 8 -> "NIX"
     try:
         return base_units_inverse[dp]
     except KeyError:
@@ -75,7 +75,7 @@ def decimal_point_to_base_unit_name(dp: int) -> str:
 
 
 def base_unit_name_to_decimal_point(unit_name: str) -> int:
-    # e.g. "BTC" -> 8
+    # e.g. "NIX" -> 8
     try:
         return base_units[unit_name]
     except KeyError:
@@ -137,7 +137,7 @@ class Satoshis(object):
         return 'Satoshis(%d)'%self.value
 
     def __str__(self):
-        return format_satoshis(self.value) + " BTC"
+        return format_satoshis(self.value) + " NIX"
 
 class Fiat(object):
     __slots__ = ('value', 'ccy')
@@ -355,7 +355,7 @@ def android_data_dir():
     return PythonActivity.mActivity.getFilesDir().getPath() + '/data'
 
 def android_headers_dir():
-    d = android_ext_dir() + '/org.electrum.electrum'
+    d = android_ext_dir() + '/org.electrum_nix.electrum_nix'
     if not os.path.exists(d):
         try:
             os.mkdir(d)
@@ -367,7 +367,7 @@ def android_check_data_dir():
     """ if needed, move old directory to sandbox """
     ext_dir = android_ext_dir()
     data_dir = android_data_dir()
-    old_electrum_dir = ext_dir + '/electrum'
+    old_electrum_dir = ext_dir + '/electrum-nix'
     if not os.path.exists(data_dir) and os.path.exists(old_electrum_dir):
         import shutil
         new_headers_path = android_headers_dir() + '/blockchain_headers'
@@ -479,11 +479,11 @@ def user_dir():
     if 'ANDROID_DATA' in os.environ:
         return android_check_data_dir()
     elif os.name == 'posix':
-        return os.path.join(os.environ["HOME"], ".electrum")
+        return os.path.join(os.environ["HOME"], ".electrum-nix")
     elif "APPDATA" in os.environ:
-        return os.path.join(os.environ["APPDATA"], "Electrum")
+        return os.path.join(os.environ["APPDATA"], "Electrum-NIX")
     elif "LOCALAPPDATA" in os.environ:
-        return os.path.join(os.environ["LOCALAPPDATA"], "Electrum")
+        return os.path.join(os.environ["LOCALAPPDATA"], "Electrum-NIX")
     else:
         #raise Exception("No home directory found in environment variables.")
         return
@@ -613,53 +613,13 @@ def time_difference(distance_in_time, include_seconds):
         return "over %d years" % (round(distance_in_minutes / 525600))
 
 mainnet_block_explorers = {
-    'Bitupper Explorer': ('https://bitupper.com/en/explorer/bitcoin/',
-                        {'tx': 'transactions/', 'addr': 'addresses/'}),
-    'Biteasy.com': ('https://www.biteasy.com/blockchain/',
-                        {'tx': 'transactions/', 'addr': 'addresses/'}),
-    'Bitflyer.jp': ('https://chainflyer.bitflyer.jp/',
-                        {'tx': 'Transaction/', 'addr': 'Address/'}),
-    'Blockchain.info': ('https://blockchain.info/',
-                        {'tx': 'tx/', 'addr': 'address/'}),
-    'blockchainbdgpzk.onion': ('https://blockchainbdgpzk.onion/',
-                        {'tx': 'tx/', 'addr': 'address/'}),
-    'Blockr.io': ('https://btc.blockr.io/',
-                        {'tx': 'tx/info/', 'addr': 'address/info/'}),
-    'Blocktrail.com': ('https://www.blocktrail.com/BTC/',
-                        {'tx': 'tx/', 'addr': 'address/'}),
-    'BTC.com': ('https://chain.btc.com/',
-                        {'tx': 'tx/', 'addr': 'address/'}),
-    'Chain.so': ('https://www.chain.so/',
-                        {'tx': 'tx/BTC/', 'addr': 'address/BTC/'}),
-    'Insight.is': ('https://insight.bitpay.com/',
-                        {'tx': 'tx/', 'addr': 'address/'}),
-    'TradeBlock.com': ('https://tradeblock.com/blockchain/',
-                        {'tx': 'tx/', 'addr': 'address/'}),
-    'BlockCypher.com': ('https://live.blockcypher.com/btc/',
-                        {'tx': 'tx/', 'addr': 'address/'}),
-    'Blockchair.com': ('https://blockchair.com/bitcoin/',
-                        {'tx': 'transaction/', 'addr': 'address/'}),
-    'blockonomics.co': ('https://www.blockonomics.co/',
-                        {'tx': 'api/tx?txid=', 'addr': '#/search?q='}),
-    'OXT.me': ('https://oxt.me/',
-                        {'tx': 'transaction/', 'addr': 'address/'}),
-    'smartbit.com.au': ('https://www.smartbit.com.au/',
+    'blockchain.nixplatform.io': ('https://blockchain.nixplatform.io/',
                         {'tx': 'tx/', 'addr': 'address/'}),
     'system default': ('blockchain:/',
                         {'tx': 'tx/', 'addr': 'address/'}),
 }
 
 testnet_block_explorers = {
-    'Blocktrail.com': ('https://www.blocktrail.com/tBTC/',
-                       {'tx': 'tx/', 'addr': 'address/'}),
-    'BlockCypher.com': ('https://live.blockcypher.com/btc-testnet/',
-                       {'tx': 'tx/', 'addr': 'address/'}),
-    'Blockchain.info': ('https://testnet.blockchain.info/',
-                       {'tx': 'tx/', 'addr': 'address/'}),
-    'BTC.com': ('https://tchain.btc.com/',
-                       {'tx': '', 'addr': ''}),
-    'smartbit.com.au': ('https://testnet.smartbit.com.au/',
-                       {'tx': 'tx/', 'addr': 'address/'}),
     'system default': ('blockchain://000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943/',
                        {'tx': 'tx/', 'addr': 'address/'}),
 }
