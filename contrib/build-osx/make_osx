@@ -3,7 +3,7 @@
 # Parameterize
 PYTHON_VERSION=3.7.1
 BUILDDIR=/tmp/electrum-build
-PACKAGE=Electrum
+PACKAGE=Electrum-NIX
 GIT_REPO=https://github.com/NixPlatform/electrum-nix
 LIBSECP_VERSION=452d8e4d2a2f9f1b5be6b02e18f1ba102e5ca0b4
 
@@ -97,4 +97,4 @@ plutil -insert 'CFBundleURLTypes' \
 	|| fail "Could not add keys to Info.plist. Make sure the program 'plutil' exists and is installed."
 
 info "Creating .DMG"
-hdiutil create -fs HFS+ -volname $PACKAGE -srcfolder dist/$PACKAGE.app dist/electrum-$VERSION.dmg || fail "Could not create .DMG"
+hdiutil create -fs HFS+ -volname $PACKAGE -srcfolder dist/$PACKAGE.app dist/electrum-nix-$VERSION.dmg || fail "Could not create .DMG"
